@@ -52,8 +52,6 @@ print(user.getUsers())
 user.updateRights('s','admin','admin',7)
 print(user.getUsers())
 
-# THIS IS LINE 1 CHANGED
-
 
     
 
