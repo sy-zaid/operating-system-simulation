@@ -36,13 +36,20 @@ class User:
         else:
             print(f"{username} not found!")
         
-    def updateRights(self,username,adminusername,adminpassword):
-                
+    def updateRights(self,username,adminusername,adminpassword,userrights):
+        user_dict = self.usersdict[username]
+        admin = self.usersdict['admin']
+        if adminusername == admin['username'] and adminpassword == admin['userpassword']:
+            user_dict['userrights'] = userrights
+        
+
+        
 
 user = User()
 user.createUser()
 print(user.getUsers())
-user.deleteUser('S','a')
+# user.deleteUser('S','a')
+user.updateRights('s','admin','admin',7)
 print(user.getUsers())
 
 
