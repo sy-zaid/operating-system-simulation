@@ -1,13 +1,43 @@
+import json
 class User:
+    """
+    A class for creating and managing users.
+
+    METHODS:
+    - createNewUser() ---> creates a new user in the system (default is already created)
+    - 
+    """
+
     def __init__(self,userid=1,username='admin',userpassword= 'admin',userrights=7):
         self.userid = userid
         self.username = username
         self.userpassword = userpassword
         self.userrights = userrights
-        self.usersdict = {'admin':{'userid':userid,'username':username,'userpassword':userpassword,'userrights':userrights}} # for all rights: 777 rwe-rwe-rwe 
+        self.filename = "users_data.json"
+        self.usersdict = {"admin":{"userid":userid,"username":username,"userpassword":userpassword,"userrights":userrights}}  # for all rights: 777 rwe-rwe-rwe 
+        with open("users_data.json", 'w') as file:
+            json.dump(self.usersdict, file)
+        try:
+            with open("users_data.json", 'r') as file:
+                self.usersdict = json.load(file)
+        except FileNotFoundError:
+            print(f"File 'users_data.json' not found. Creating a new one.")
         self.defaultid = 1
+        self.loadUsersFromFile()
+        self.saveUsersToFile()
 
-    def createUser(self):
+    def saveUsersToFile(self):
+        with open(self.filename, 'w') as file:
+            json.dump(self.usersdict, file)
+
+    def loadUsersFromFile(self):
+        try:
+            with open(self.filename, 'r') as file:
+                self.usersdict = json.load(file)
+        except FileNotFoundError:
+            print(f"File '{self.filename}' not found. Creating a new one.")
+
+    def createNewUser(self):
         user = {}
         auto_id = self.defaultid + 1
         default_rights = 5
@@ -21,6 +51,7 @@ class User:
             user['userpassword'] = userpassword
             user['userrights'] = default_rights
             self.usersdict[f"{username}"] = user
+            self.saveUsersToFile()
 
     def getUsers(self):
         return self.usersdict
@@ -36,7 +67,7 @@ class User:
         else:
             print(f"{username} not found!")
         
-    def updateRights(self,username,adminusername,adminpassword,userrights):
+    def updateUserType(self,username,adminusername,adminpassword,userrights):
         user_dict = self.usersdict[username]
         admin = self.usersdict['admin']
         if adminusername == admin['username'] and adminpassword == admin['userpassword']:
@@ -46,10 +77,10 @@ class User:
         
 
 user = User()
-user.createUser()
+user.createNewUser()
 print(user.getUsers())
 # user.deleteUser('S','a')
-user.updateRights('s','admin','admin',7)
+# user.updateUserType('s','admin','admin',7)
 print(user.getUsers())
 
 
