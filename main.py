@@ -26,6 +26,7 @@ class OperatingSystemSimulation():
     
     def serviceManagement(self):
         print("Managing services...")
+        
     def processManagement(self):
         print("Opening Task Manager...")
     
