@@ -16,7 +16,7 @@ class File:
         self.currentdirectory = os.getcwd()
         self.filesdata = "files_data.json"
         self.filesdict = {}
-        self.loadFileDetails
+        self.loadFileDetails()
         self.saveFileDetails()
 
 
@@ -81,11 +81,16 @@ class File:
         print("\nChanging the rights of the file...")
         self.loadFileDetails()
         inp_filename = input("Enter the filename you want to change rights of OR 'cancel' to cancel the operation # ")
-        inp_rights = input("Enter rights in rwxrwxrwx format # ")
+        
         if inp_filename != "cancel" and inp_filename in self.filesdict:
+            print(f"\nThe details for {inp_filename} are:")
+            self._displayFileDetails(inp_filename)
+            inp_rights = input("Enter rights in rwxrwxrwx format # ")
             curfile = self.filesdict.get(inp_filename)
             curfile["filerights"] = str(inp_rights)
             print(f"\nFile {inp_filename} rights updated successfully.")
+            print(f"\nUpdated rights are:")
+            self._displayFileDetails(inp_filename)
         
         else:
             print("\nOperation cancelled.")
@@ -106,7 +111,7 @@ class File:
                 existing_data = json.load(file)
         except FileNotFoundError:
             existing_data = {}  # Initialize with an empty dictionary if the file doesn't exist
-        
+
         existing_data.update(self.filesdict)  # Update existing data with new data
 
         with open(self.filesdata, 'w') as file:
@@ -123,5 +128,6 @@ class File:
         
 file1 = File()
 file1.createFile()
+file1.changeFileRights()
 
 # file1.searchFile()
