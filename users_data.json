@@ -1,1 +1,1 @@
-{"admin": {"userid": 1, "username": "admin", "userpassword": "admin", "userrights": 7}}
+{"admin": {"userid": 1, "username": "admin", "userpassword": "admin", "userrights": 7}, "Syed Zaid": {"userid": 2, "username": "Syed Zaid", "userpassword": "abcd", "userrights": 5}, "Zaid": {"userid": 2, "username": "Zaid", "userpassword": "a", "userrights": 5}}

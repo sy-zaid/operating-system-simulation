@@ -3,7 +3,7 @@ class OperatingSystemSimulation():
         pass
 
     def mainMenu(self):
-        print(f"1. User Management\n2.Service Management\n3.Process Management\n4.Backup")
+        print(f"1. User Management\n2. Service Management\n3. Process Management\n4. Backup")
         first_input = input("Enter your choice(1-4 or 'home' to return home): ")
         if first_input == '1':
             self.userManagement()

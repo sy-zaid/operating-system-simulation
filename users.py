@@ -14,12 +14,11 @@ class User:
         self.userpassword = userpassword
         self.userrights = userrights
         self.filename = "users_data.json"
-        self.usersdict = {"admin":{"userid":userid,"username":username,"userpassword":userpassword,"userrights":userrights}}  # for all rights: 777 rwe-rwe-rwe 
-        with open("users_data.json", 'w') as file:
-            json.dump(self.usersdict, file)
+
         try:
             with open("users_data.json", 'r') as file:
                 self.usersdict = json.load(file)
+                pass
         except FileNotFoundError:
             print(f"File 'users_data.json' not found. Creating a new one.")
         self.defaultid = 1
@@ -56,12 +55,15 @@ class User:
     def getUsers(self):
         return self.usersdict
     
-    def deleteUser(self,username,confirmation_password):
+    def deleteUser(self):
+        username = input("Enter username to delete: ")
+        confirmation_password = input("Enter password: ")
+
         user_dict = self.usersdict.get(username)
         if user_dict:
             if user_dict['userpassword'] == confirmation_password:
                 del self.usersdict[username]
-                print(f"{username} deleted successfully")
+                print(f"User {username} deleted successfully")
             else:
                 print(f"Wrong password entered for {username}")
         else:
@@ -81,7 +83,7 @@ class User:
 user = User()
 user.createNewUser()
 print(user.getUsers())
-user.deleteUser('S','a')
+user.deleteUser()
 # user.updateUserType('s','admin','admin',7)
 print(user.getUsers())
 
