@@ -1,4 +1,4 @@
-import os,json
+import os,json,time
 
 class File:
     """
@@ -27,7 +27,7 @@ class File:
         newfile = {}
         filepath = os.path.join(self.currentdirectory,filename)
         try:
-            with open(filepath,'w'):
+            with open(filepath,'x'):
                 newfile["filename"] = filename
                 newfile["filetype"] = filetype
                 newfile["filesize"] = os.path.getsize(filepath) #Gets the size of the current file.
@@ -43,12 +43,50 @@ class File:
             print(f"Exit code-1 | failed to create file. {e}")
 
     def searchFile(self):
+        print("Searching for a file...\n")
         self.loadFileDetails()
         inp_filename = input("Enter a filename to search # ")
-        if self.filesdict[inp_filename]:
-            print(f"File found with name {inp_filename}. Type m to show details # ")
+        print("Searching...\n")
+        time.sleep(1.5)
+        if inp_filename in self.filesdict:
+            print(f"File found with name {inp_filename}. Type m and press enter to show details # ")
             temp = input("")
+            if temp == "m":
+                self._displayFileDetails(inp_filename)
+            else:
+                return True
+        else:
+            print(f"File NOT found with name {inp_filename}.")
+            return False
+
+
+    def deleteFile(self):
+        print("Deleting a file... ")
+        self.loadFileDetails()
+        inp_filename = input("Enter a filename to delete it OR 'cancel' to cancel to operation # ")
+        if inp_filename != "cancel" and inp_filename in self.filesdict:
+            try:
+                del self.filesdict[inp_filename]
+                print(f"Successfully deleted {inp_filename}")
+            except:
+                print("File deletion unsuccessful :(")
         
+        else:
+            print("Operation cancelled :|")
+        
+        
+
+
+
+
+    def _displayFileDetails(self, filename):
+        file_details = self.filesdict.get(filename, {})  # Get file details or an empty dictionary if not found
+        # Iterate over keys and values and print them
+        for key, value in file_details.items():
+            print(f"{key}: {value}")
+
+    
+
 
     def saveFileDetails(self):
         with open(self.filesdata, 'w') as file:
@@ -64,3 +102,4 @@ class File:
         
 file1 = File()
 file1.createFile()
+# file1.searchFile()
