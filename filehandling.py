@@ -17,10 +17,12 @@ class File:
         self.filesdata = "files_data.json"
         self.filesdict = {}
         self.loadFileDetails
+        self.saveFileDetails()
 
 
     def createFile(self):
-        print("Creating a new file...\n")
+        self.loadFileDetails()
+        print("\nCreating a new file...")
         filename = input("Enter a file name to create: (e.g. file1.txt) # ")
         filetype = filename.split('.')[-1]
         filerights = "rwx------" #Default rights set here when creating a file.
@@ -35,49 +37,61 @@ class File:
                 self.filesdict[f"{filename}"] = newfile
                 self.saveFileDetails()
 
-            print(f"File {filename} created successfully.")
+            print(f"\nFile {filename} created successfully.")
         except FileExistsError:
-            print("Exit code-1 | failed to create file as it already exists.")
+            print("\nExit code-1 | failed to create file as it already exists.")
         
         except Exception as e:
-            print(f"Exit code-1 | failed to create file. {e}")
+            print(f"\nExit code-1 | failed to create file. {e}")
 
     def searchFile(self):
-        print("Searching for a file...\n")
+        print("\nSearching for a file...")
         self.loadFileDetails()
         inp_filename = input("Enter a filename to search # ")
-        print("Searching...\n")
+        print("\nSearching...")
         time.sleep(1.5)
         if inp_filename in self.filesdict:
-            print(f"File found with name {inp_filename}. Type m and press enter to show details # ")
+            print(f"\nFile found with name {inp_filename}. Type m and press enter to show details # ")
             temp = input("")
             if temp == "m":
                 self._displayFileDetails(inp_filename)
             else:
                 return True
         else:
-            print(f"File NOT found with name {inp_filename}.")
+            print(f"\nFile NOT found with name {inp_filename}.")
             return False
 
 
     def deleteFile(self):
-        print("Deleting a file... ")
+        print("\nDeleting a file... ")
         self.loadFileDetails()
-        inp_filename = input("Enter a filename to delete it OR 'cancel' to cancel to operation # ")
+        inp_filename = input("Enter a filename to delete it OR 'cancel' to cancel the operation # ")
         if inp_filename != "cancel" and inp_filename in self.filesdict:
             try:
                 del self.filesdict[inp_filename]
-                print(f"Successfully deleted {inp_filename}")
+                self.saveFileDetails()
+                print(f"\nSuccessfully deleted {inp_filename}")
             except:
-                print("File deletion unsuccessful :(")
+                print("\nFile deletion unsuccessful :(")
         
         else:
-            print("Operation cancelled :|")
+            print("\nOperation cancelled :|")
+
+    def changeFileRights(self):
+        print("\nChanging the rights of the file...")
+        self.loadFileDetails()
+        inp_filename = input("Enter the filename you want to change rights of OR 'cancel' to cancel the operation # ")
+        inp_rights = input("Enter rights in rwxrwxrwx format # ")
+        if inp_filename != "cancel" and inp_filename in self.filesdict:
+            curfile = self.filesdict.get(inp_filename)
+            curfile["filerights"] = str(inp_rights)
+            print(f"\nFile {inp_filename} rights updated successfully.")
         
+        else:
+            print("\nOperation cancelled.")
+
+
         
-
-
-
 
     def _displayFileDetails(self, filename):
         file_details = self.filesdict.get(filename, {})  # Get file details or an empty dictionary if not found
@@ -85,12 +99,19 @@ class File:
         for key, value in file_details.items():
             print(f"{key}: {value}")
 
-    
-
 
     def saveFileDetails(self):
+        try:
+            with open(self.filesdata, 'r') as file:
+                existing_data = json.load(file)
+        except FileNotFoundError:
+            existing_data = {}  # Initialize with an empty dictionary if the file doesn't exist
+        
+        existing_data.update(self.filesdict)  # Update existing data with new data
+
         with open(self.filesdata, 'w') as file:
-            json.dump(self.filesdict, file)
+            json.dump(existing_data, file)
+
         
     def loadFileDetails(self):
         try:
@@ -102,4 +123,5 @@ class File:
         
 file1 = File()
 file1.createFile()
+
 # file1.searchFile()
