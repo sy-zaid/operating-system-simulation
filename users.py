@@ -66,12 +66,14 @@ class User:
                 print(f"Wrong password entered for {username}")
         else:
             print(f"{username} not found!")
+        self.saveUsersToFile()
         
     def updateUserType(self,username,adminusername,adminpassword,userrights):
         user_dict = self.usersdict[username]
         admin = self.usersdict['admin']
         if adminusername == admin['username'] and adminpassword == admin['userpassword']:
             user_dict['userrights'] = userrights
+        self.saveUsersToFile()
         
 
         
@@ -79,7 +81,7 @@ class User:
 user = User()
 user.createNewUser()
 print(user.getUsers())
-# user.deleteUser('S','a')
+user.deleteUser('S','a')
 # user.updateUserType('s','admin','admin',7)
 print(user.getUsers())
 
