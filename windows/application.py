@@ -1,7 +1,5 @@
 import subprocess
 
-
-
 class ApplicationOpener:
     """
     Choose an Application

@@ -2,6 +2,7 @@ import os,time
 from users import User
 from filehandling import File
 from folderhandling import Folder
+from exampletasks import sortByTwoThreads
 import threading
 
 # For semaphores
@@ -105,15 +106,17 @@ class OperatingSystemSimulation():
         """
         1. Files Services
         2. Folder Services
-        3. Home
+        3. Perform Sorting
         """
-        print(f"1. Files Services\n2. Folder Services\n3. Home")
+        print(f"1. Files Services\n2. Folder Services\n3. Perform Sorting")
         inp_opt = input("Choose an option (1-3) # ")
         if inp_opt == '1':
             self.servicesFileHandling()
         elif inp_opt == '2':
             self.servicesFolderHandling()
-        elif inp_opt == 'home' or inp_opt == '3':
+        elif inp_opt == '3':
+            self.servicesSortingArray()
+        elif inp_opt == 'home':
             self.mainMenu() 
     
     def servicesFileHandling(self):
@@ -172,6 +175,19 @@ class OperatingSystemSimulation():
             folder.backupAllFolders()
         
         self.serviceManagement()
+
+    def servicesSortingArray(self):
+        """
+        Function to take input for sorting and simulate the threads in an OS.
+
+        """
+        print(f"\nSorting an Array\nEnter a range to create 10 random numbers.")
+        inp_range = input("(e.g. 0,100)# ")
+        inp_range = list(map(int,inp_range.split(",")))
+        sortByTwoThreads(inp_range)
+        self.serviceManagement()
+
+
 
     def processManagement(self):
         print("Opening Task Manager...")
