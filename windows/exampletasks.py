@@ -16,7 +16,6 @@ Sorted elements: {result[start:end]}""")
 def sortByTwoThreads(lststartend):
     """
     Function to create two threads at a time, simulating multithreading in an OS.
-
     """
     data = [random.randint(lststartend[0],lststartend[1]) for i in range(10)]
     # data = [53, 66, 71, 7, 42, 64, 65, 10, 96, 20]

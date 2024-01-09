@@ -15,7 +15,7 @@ class TaskManager:
             file.write(result.stdout)
 
     def displayProcesses(self):
-        # Read the content of the file and display it
+        # Reading the content of the file and display it
         with open(self._output_file, 'r') as file:
             content = file.read()
             easygui.msgbox(content)
@@ -35,11 +35,10 @@ class TaskManager:
         except:
             print(f"\nFailed to kill the process with PID: {self.killpid}")
             return 
-    
 
        
-tm = TaskManager()
-tm.runTasklist()
-tm.displayProcesses()
-tm.killProcess()
+# tm = TaskManager()
+# tm.runTasklist()
+# tm.displayProcesses()
+# tm.killProcess()
     
