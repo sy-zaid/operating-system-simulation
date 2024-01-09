@@ -51,14 +51,14 @@ class File:
         print("\nSearching...")
         time.sleep(1.5)
         if inp_filename in self.filesdict:
-            print(f"\nFile found with name {inp_filename}. Type m and press enter to show details # ")
+            print(f"\nFile found with name {inp_filename} :) | Type m and press enter to show details # ")
             temp = input("")
             if temp == "m":
                 self._displayFileDetails(inp_filename)
             else:
                 return True
         else:
-            print(f"\nFile NOT found with name {inp_filename}.")
+            print(f"\nFile NOT found with name {inp_filename}. :()")
             return False
 
 
@@ -70,7 +70,7 @@ class File:
             try:
                 del self.filesdict[inp_filename]
                 self.saveFileDetails()
-                print(f"\nSuccessfully deleted {inp_filename}")
+                print(f"\nSuccessfully deleted {inp_filename} :)")
             except:
                 print("\nFile deletion unsuccessful :(")
         
@@ -93,7 +93,7 @@ class File:
             self._displayFileDetails(inp_filename)
         
         else:
-            print("\nOperation cancelled.")
+            print("\nOperation cancelled :| ")
 
 
         
@@ -123,7 +123,7 @@ class File:
             with open(self.filesdata, 'r') as file:
                 self.filesdict = json.load(file)
         except FileNotFoundError:
-            print(f"File '{self.filesdata}' not found. Creating a new one.")
+            print(f"File '{self.filesdata}' not found. Creating a new one. :)")
 
         
 file1 = File()
