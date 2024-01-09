@@ -121,7 +121,7 @@ class OperatingSystemSimulation():
         elif inp_file == '4':
             file.searchFile()
         elif inp_file == '5':
-            file.backupAllFiles()
+            file.backupAllFiles()   
         
         self.serviceManagement()
 
