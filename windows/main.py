@@ -131,6 +131,7 @@ class OperatingSystemSimulation():
             file.listFiles()
         elif inp_file == '2':
             mutex.acquire() 
+            print("Bu")
             file.deleteFile() # File deleted
             mutex.release() 
         elif inp_file == '3':

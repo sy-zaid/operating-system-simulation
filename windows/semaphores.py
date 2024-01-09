@@ -20,7 +20,6 @@ def producer():
         mutex.release()  # added
         full.release()
         time.sleep(1)
-
     else:
         mutex.acquire()
 
@@ -72,7 +71,8 @@ producerThread5 = threading.Thread(target=producer)
 consumerThread5 = threading.Thread(target=consumer)
 producerThread6 = threading.Thread(target=producer)
 consumerThread6 = threading.Thread(target=consumer)
-#
+
+
 consumerThread1.start()
 producerThread1.start()
 
