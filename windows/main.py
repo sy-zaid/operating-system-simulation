@@ -221,7 +221,7 @@ class OperatingSystemSimulation():
 
     # Screen - Backup
     def backup(self):
-        print(f"\n----- Entered Backup -----\n1. Backup Files\n2. Backup Folders")
+        print(f"\n----- Entered Backup -----\n1. Backup All Files\n2. Backup All Folders")
         inp_bp = input("Choose an option (1-2) OR type 'home' to return to Main-Menu # ")
         if inp_bp == 'home':
             self.mainMenu()

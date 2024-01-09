@@ -154,8 +154,8 @@ class Folder:
         - source_directory (str): The path to the source directory.
         - destination_directory (str): The path to the destination directory.
         """
-        # destination_directory = os.path.abspath(input("Enter the path to backups folder # "))
-        destination_directory = './'
+        destination_directory = os.path.abspath(input("Enter the path to backups folder # "))
+        # destination_directory = './'
         try:
             # Create the destination directory if it doesn't exist
             os.makedirs(destination_directory, exist_ok=True)
@@ -216,8 +216,8 @@ class Folder:
         except FileNotFoundError:
             print(f"File '{self.foldersdata}' not found. Creating a new one. :)")
 
-folder1 = Folder()
+# folder1 = Folder()
 # folder1.createFolder()
 # folder1.changeFolderRights()
 # folder1.searchFolder()
-folder1.backupAllFolders()
+# folder1.backupAllFolders()
