@@ -80,7 +80,8 @@ class File:
                 file_path = os.path.join(self.filesdict.get(inp_filename)["filepath"])
                 os.remove(file_path)
                 del self.filesdict[inp_filename]
-                self.loadFileDetails()
+                with open(self.filesdata, 'w') as file:
+                    json.dump(self.filesdict, file)
                 self.saveFileDetails()
                 print(f"\nSuccessfully deleted {inp_filename} :)")
             except:
@@ -153,7 +154,8 @@ class File:
         existing_data.update(self.filesdict)  # Update existing data with new data
 
         with open(self.filesdata, 'w') as file:
-            json.dump(self.filesdata, file)
+            json.dump(existing_data, file)
+
         
     def loadFileDetails(self):
         try:
