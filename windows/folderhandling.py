@@ -21,6 +21,16 @@ class Folder:
         self.saveFolderDetails()
 
     def createFolder(self):
+        """
+         This method provides a structured way to create folders
+         within a directory, manage their details in a dictionary.
+        
+         Creating a new folder...
+         Enter a folder name to create: (e.g. folder1) # Talha
+
+         Folder Talha created successfully.
+
+        """
         self.loadFolderDetails()
         print("\nCreating a new folder...")
         foldername = input("Enter a folder name to create: (e.g. folder1) # ")
@@ -43,6 +53,14 @@ class Folder:
             print(f"\nExit code-1 | failed to create folder. {e}")
 
     def searchFolder(self):
+        """
+        Searches the desired folder.
+
+                
+        Searching for a folder...
+        Enter a folder name to search #
+        
+        """
         print("\nSearching for a folder...")
         self.loadFolderDetails()
         inp_foldername = input("Enter a folder name to search # ")
@@ -60,12 +78,36 @@ class Folder:
             return False
 
     def listFolders(self):
+        """
+        Lists all the existing folders down
+
+        Below are all the folders created in OS
+
+        Talha
+        1. Files Services
+        2. Folder Services
+        3. Home
+        Choose an option (1-3) #
+        
+        """
         print(f"\nBelow are all the folders created in OS")
         self.loadFolderDetails()
         for key in self.foldersdict:
             print(f"\n{key}")
 
     def deleteFolder(self):
+        """
+        This method is designed to delete a folder and
+        remove its details from the foldersdict dictionary and storage.
+        
+
+        Deleting a folder...
+        Enter a folder name to delete it OR 'cancel' to cancel the operation #
+        
+        The cancel will break operation.
+
+        """
+
         print("\nDeleting a folder... ")
         self.loadFolderDetails()
         inp_foldername = input("Enter a folder name to delete it OR 'cancel' to cancel the operation # ")
@@ -83,6 +125,11 @@ class Folder:
             print("\nOperation cancelled :|")
 
     def changeFolderRights(self):
+        """
+        The changeFolderRights() method appears designed to modify
+        the permissions (rights) of a folder stored in self.foldersdict.
+
+        """
         print("\nChanging the rights of the folder...")
         self.loadFolderDetails()
         inp_foldername = input("Enter the folder name you want to change rights of OR 'cancel' to cancel the operation # ")
@@ -128,6 +175,12 @@ class Folder:
             print(f"\nBackup failed. Error: {e}")
 
     def _displayFolderDetails(self, foldername):
+        """
+        This method provides a way to present the details of a specified
+        folder stored in the foldersdict dictionary.
+        
+        """
+
         folder_details = self.foldersdict.get(foldername, {})  # Get folder details or an empty dictionary if not found
         # Iterate over keys and values and print them
         for key, value in folder_details.items():
@@ -135,6 +188,17 @@ class Folder:
         
 
     def saveFolderDetails(self):
+        """
+         This method provides a structured way to update or create a folder containing
+         folder details and handles potential exceptions that might occur during the process
+        
+         Functionalities:
+            -Load Existing Data (if available)
+            -Handling Folder Not Found
+            -Update Data
+            -Save Updated Data to File
+        """
+        
         try:
             with open(self.foldersdata, 'r') as file:
                 existing_data = json.load(file)
@@ -147,6 +211,15 @@ class Folder:
             json.dump(existing_data, file)
 
     def loadFolderDetails(self):
+        """
+        This method provides a structured approach to load
+        previously saved folder details from a file into a dictionary
+        
+        Functionalities:
+            -File reading
+            -Loading Data
+            -Handling not found
+        """
         try:
             with open(self.foldersdata, 'r') as file:
                 self.foldersdict = json.load(file)
