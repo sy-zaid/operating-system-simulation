@@ -1,4 +1,4 @@
-import os,json,time
+import os,json,time,shutil
 
 class Folder:
     """
@@ -57,6 +57,11 @@ class Folder:
             print(f"\nFolder NOT found with name {inp_foldername}. :()")
             return False
 
+    def listFolders(self):
+        self.loadFolderDetails()
+        for key in self.foldersdict:
+            print(f"\n{key}")
+
     def deleteFolder(self):
         print("\nDeleting a folder... ")
         self.loadFolderDetails()
@@ -88,12 +93,41 @@ class Folder:
             self._displayFolderDetails(inp_foldername)
         else:
             print("\nOperation cancelled :| ")
+    
+    def backupAllFolders(self):
+        
+        """
+        Backup all folders from the source directory to the destination directory.
+
+        Parameters:
+        - source_directory (str): The path to the source directory.
+        - destination_directory (str): The path to the destination directory.
+        """
+        destination_directory = input("Enter the path to backups folder # ")
+        try:
+            # Create the destination directory if it doesn't exist
+            os.makedirs(destination_directory, exist_ok=True)
+
+            # List all folders in the source directory
+            folders = [f for f in os.listdir(self.currentdirectory) if os.path.isdir(os.path.join(self.currentdirectory, f))]
+
+            # Backup each folder to the destination directory
+            for folder in folders:
+                source_path = os.path.join(self.currentdirectory, folder)
+                destination_path = os.path.join(destination_directory, folder)
+
+                shutil.copy2(source_path, destination_path)  # Copy folder with metadata
+
+            print(f"\nBackup successfull! Folders backed up from {self.currentdirectory} to {destination_directory}")
+        except Exception as e:
+            print(f"\nBackup failed. Error: {e}")
 
     def _displayFolderDetails(self, foldername):
         folder_details = self.foldersdict.get(foldername, {})  # Get folder details or an empty dictionary if not found
         # Iterate over keys and values and print them
         for key, value in folder_details.items():
             print(f"{key}: {value}")
+        
 
     def saveFolderDetails(self):
         try:
@@ -114,7 +148,8 @@ class Folder:
         except FileNotFoundError:
             print(f"File '{self.foldersdata}' not found. Creating a new one. :)")
 
-# folder1 = Folder()
+folder1 = Folder()
 # folder1.createFolder()
 # folder1.changeFolderRights()
 # folder1.searchFolder()
+folder1.backupAllFolders()

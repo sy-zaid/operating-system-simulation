@@ -112,8 +112,26 @@ class OperatingSystemSimulation():
 
         
     def servicesFolderHandling(self):
+        """
+        1. List Fiolder
+        2. Delete a folder
+        3. Create a Folder
+        4. Search a folder
+        5. Backup All Folder
+        """
         folder = Folder()
-        print(f"\nBelow are the services for folder handling, please choose an option:\n1. List Folder\n2. Delete a folder\n3. Create a folder\n4. Backup All Folders ")
+        print(f"\nBelow are the services for folder handling, please choose an option:\n1. List Folder\n2. Delete a folder\n3. Create a Folder\n4. Search a folder\n5. Backup All Folders ")
+        inp_folder = input("Choose an option (1-5) or 'home' to return Home # ")
+        if inp_folder == '1':
+            folder.listFolders()
+        elif inp_folder == '2':
+            folder.deleteFolder()
+        elif inp_folder == '3':
+            folder.createFolder()
+        elif inp_folder == '4':
+            folder.searchFolder()
+        elif inp_folder == '5':
+            folder.backupAllFolders()
 
     def processManagement(self):
         print("Opening Task Manager...")
