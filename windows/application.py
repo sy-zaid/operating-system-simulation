@@ -1,6 +1,17 @@
 import subprocess
 
 class ApplicationOpener:
+    
+    """
+    Choose an Application
+    1. Google Chrome
+    2. Microsoft Edge
+    3. Task Manager
+    Enter number 1/2/3:
+    input-parameters:
+            - choice: To choose between the applications 1/2/3
+            - subprocess: It creates a process and runs it        
+    """
     def open_application(self):
         print("Choose an Application\n1. Google Chrome\n2. Microsoft Edge\n3. Task Manager")
         choice = input("Enter number 1/2/3: ")
