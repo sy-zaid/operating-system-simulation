@@ -13,7 +13,7 @@ class File:
         self.filename = filename
         self.filetype = filetype
         self.rights = rights
-        self.currentdirectory = os.getcwd()
+        self.currentdirectory = "./home"
         self.filesdata = "files_data.json"
         self.filesdict = {}
         self.loadFileDetails()

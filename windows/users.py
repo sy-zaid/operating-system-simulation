@@ -13,10 +13,10 @@ class User:
         self.username = username
         self.userpassword = userpassword
         self.userrights = userrights
-        self.filename = "users_data.json"
+        self.filename = "./windows/users_data.json"
 
         try:
-            with open("users_data.json", 'r') as file:
+            with open(self.filename, 'r') as file:
                 self.usersdict = json.load(file)
                 pass
         except FileNotFoundError:
@@ -55,6 +55,11 @@ class User:
     def getUsers(self):
         return self.usersdict
     
+    def getSpecifiedUser(self):
+        self.loadUsersFromFile()
+
+        return self.usersdict.get()
+    
     def deleteUser(self):
         username = input("Enter username to delete: ")
         confirmation_password = input("Enter password: ")
@@ -80,12 +85,12 @@ class User:
 
         
 
-user = User()
-user.createNewUser()
-print(user.getUsers())
-user.deleteUser()
-# user.updateUserType('s','admin','admin',7)
-print(user.getUsers())
+# user = User()
+# user.createNewUser()
+# print(user.getUsers())
+# user.deleteUser()
+# # user.updateUserType('s','admin','admin',7)
+# print(user.getUsers())
 
 
     

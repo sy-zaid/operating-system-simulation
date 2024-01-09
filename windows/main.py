@@ -1,6 +1,41 @@
+import os,time
+from users import User
+
 class OperatingSystemSimulation():
     def __init__(self):
         pass
+    
+    def login(self):
+        print("\nEnter login credentials...")
+        inp_username = input("Enter username OR 'admin' for admin-user OR 'cancel' to cancel operation # ")
+        inp_password = input("Enter password # ")
+        user = User()
+        if inp_username in user.getUsers() and inp_username != 'cancel':
+            print(f"\n----- Welcome {inp_username} :) -----\n")
+            self.mainMenu()
+        elif inp_username == 'cancel':
+            self.lsScreen()
+        else:
+            print(f"\n{inp_username} not found :()")
+        
+    def signup(self):
+        print("\nEnter signup credentials...")
+        user = User()
+        user.createNewUser()
+
+    def lsScreen(self):
+        print("\n------------------------- WELCOME TO ZAT -------------------------\n")
+        print(f"1. Login to existing user\n2. Signup as a new user")
+        lsinput = input("Enter your choice (1-2) OR 'shut' to shutdown the system # ")
+
+        checkinp_dict = {'1':self.login(),'2':self.signup()}
+        if lsinput == 'shut':
+            print(f"\nShutting down...")
+            time.sleep(3)
+            return
+        checkinp_dict[lsinput]
+        
+        
 
     def mainMenu(self):
         print(f"1. User Management\n2. Service Management\n3. Process Management\n4. Backup")
@@ -35,4 +70,4 @@ class OperatingSystemSimulation():
 
 if __name__ == "__main__":
     OS = OperatingSystemSimulation()
-    OS.mainMenu()
+    OS.lsScreen()
