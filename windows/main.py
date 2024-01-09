@@ -2,6 +2,14 @@ import os,time
 from users import User
 from filehandling import File
 from folderhandling import Folder
+import threading
+import random
+import time
+
+buf = []
+empty = threading.Semaphore(1)
+full = threading.Semaphore(0)
+mutex = threading.Lock()
 
 class OperatingSystemSimulation():
     def __init__(self):
@@ -19,6 +27,7 @@ class OperatingSystemSimulation():
                 self.mainMenu()
             else:
                 print(f"\nIncorrect password entered.")
+                self.login()
 
         elif inp_username == 'cancel':
             self.lsScreen()
@@ -101,19 +110,25 @@ class OperatingSystemSimulation():
         if inp_file == '1':
             file.listFiles()
         elif inp_file == '2':
-            file.deleteFile()
+            mutex.acquire() 
+            file.deleteFile() # File deleted
+            mutex.release() 
         elif inp_file == '3':
+            mutex.acquire() 
             file.createFile()
+            mutex.release()    
+            time.sleep(1)
         elif inp_file == '4':
             file.searchFile()
         elif inp_file == '5':
             file.backupAllFiles()
-            
+        
+        self.serviceManagement()
 
         
     def servicesFolderHandling(self):
         """
-        1. List Fiolder
+        1. List Folders
         2. Delete a folder
         3. Create a Folder
         4. Search a folder
