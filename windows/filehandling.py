@@ -1,4 +1,5 @@
 import os,json,time
+import shutil
 
 class File:
     """
@@ -58,7 +59,7 @@ class File:
             else:
                 return True
         else:
-            print(f"\nFile NOT found with name {inp_filename}. :()")
+            print(f"\nFile NOT found with name {inp_filename} :(")
             return False
     
     def listFiles(self):
@@ -100,6 +101,33 @@ class File:
         else:
             print("\nOperation cancelled :| ")
 
+    def backupAllFiles(self):
+        
+        """
+        Backup all files from the source directory to the destination directory.
+
+        Parameters:
+        - source_directory (str): The path to the source directory.
+        - destination_directory (str): The path to the destination directory.
+        """
+        destination_directory = input("Enter the path to backups folder # ")
+        try:
+            # Create the destination directory if it doesn't exist
+            os.makedirs(destination_directory, exist_ok=True)
+
+            # List all files in the source directory
+            files = [f for f in os.listdir(self.currentdirectory) if os.path.isfile(os.path.join(self.currentdirectory, f))]
+
+            # Backup each file to the destination directory
+            for file in files:
+                source_path = os.path.join(self.currentdirectory, file)
+                destination_path = os.path.join(destination_directory, file)
+
+                shutil.copy2(source_path, destination_path)  # Copy file with metadata
+
+            print(f"\nBackup successfull! Files backed up from {self.currentdirectory} to {destination_directory}")
+        except Exception as e:
+            print(f"\nBackup failed. Error: {e}")
 
         
 
@@ -133,6 +161,6 @@ class File:
         
 # file1 = File()
 # file1.createFile()
-# file1.changeFileRights()
+# # file1.changeFileRights()
 
 # file1.searchFile()

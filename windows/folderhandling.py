@@ -114,7 +114,7 @@ class Folder:
         except FileNotFoundError:
             print(f"File '{self.foldersdata}' not found. Creating a new one. :)")
 
-folder1 = Folder()
-folder1.createFolder()
-folder1.changeFolderRights()
+# folder1 = Folder()
+# folder1.createFolder()
+# folder1.changeFolderRights()
 # folder1.searchFolder()

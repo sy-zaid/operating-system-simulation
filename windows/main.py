@@ -88,11 +88,27 @@ class OperatingSystemSimulation():
             self.mainMenu()
     
     def servicesFileHandling(self):
+        """
+        1. List Files
+        2. Delete a file
+        3. Create a File
+        4. Search a file
+        5. Backup All Files
+        """
         file = File()
         print(f"\nBelow are the services for file handling, please choose an option:\n1. List Files\n2. Delete a file\n3. Create a File\n4. Search a file\n5. Backup All Files ")
-        inp_file = input("Choose an option (1-5) or home to return Home # ")
+        inp_file = input("Choose an option (1-5) or 'home' to return Home # ")
         if inp_file == '1':
             file.listFiles()
+        elif inp_file == '2':
+            file.deleteFile()
+        elif inp_file == '3':
+            file.createFile()
+        elif inp_file == '4':
+            file.searchFile()
+        elif inp_file == '5':
+            file.backupAllFiles()
+            
 
         
     def servicesFolderHandling(self):
