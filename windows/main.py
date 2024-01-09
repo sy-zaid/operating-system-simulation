@@ -1,5 +1,7 @@
 import os,time
 from users import User
+from filehandling import File
+from folderhandling import Folder
 
 class OperatingSystemSimulation():
     def __init__(self):
@@ -11,8 +13,13 @@ class OperatingSystemSimulation():
         inp_password = input("Enter password # ")
         user = User()
         if inp_username in user.getUsers() and inp_username != 'cancel':
-            print(f"\n----- Welcome {inp_username} :) -----\n")
-            self.mainMenu()
+            userdata = user.getUsers().get(inp_username)
+            if userdata['userpassword'] == inp_password:
+                print(f"\n----- Welcome {inp_username} :) -----\n")
+                self.mainMenu()
+            else:
+                print(f"\nIncorrect password entered.")
+
         elif inp_username == 'cancel':
             self.lsScreen()
         else:
@@ -22,24 +29,31 @@ class OperatingSystemSimulation():
         print("\nEnter signup credentials...")
         user = User()
         user.createNewUser()
+        self.login()
 
     def lsScreen(self):
         print("\n------------------------- WELCOME TO ZAT -------------------------\n")
         print(f"1. Login to existing user\n2. Signup as a new user")
         lsinput = input("Enter your choice (1-2) OR 'shut' to shutdown the system # ")
 
-        checkinp_dict = {'1':self.login(),'2':self.signup()}
         if lsinput == 'shut':
             print(f"\nShutting down...")
             time.sleep(3)
             return
-        checkinp_dict[lsinput]
+        elif lsinput == '1':
+            self.login()
+        elif lsinput == '2':
+            self.signup()
         
+        else:
+            print(f"\nInvalid Input Choice, Please Retry...")
+            self.lsScreen()
+
         
 
     def mainMenu(self):
         print(f"1. User Management\n2. Service Management\n3. Process Management\n4. Backup")
-        first_input = input("Enter your choice(1-4 or 'home' to return home): ")
+        first_input = input("Enter your choice(1-4 or 'home' to return home | 'logout') # ")
         if first_input == '1':
             self.userManagement()
         
@@ -55,13 +69,36 @@ class OperatingSystemSimulation():
         elif str(first_input) and str(first_input) == 'home':
             self.mainMenu()
 
+        elif str(first_input) and str(first_input) == 'logout':
+            print(f"\nLogged Out...")
+            self.lsScreen()
+
     
     def userManagement(self):
         print('You entered in User Management')
     
     def serviceManagement(self):
-        print("Managing services...")
+        print(f"1. Files Services\n2. Folder Services\n3. Home")
+        inp_opt = input("Choose an option (1-3) # ")
+        if inp_opt == '1':
+            self.servicesFileHandling()
+        elif inp_opt == '2':
+            self.servicesFolderHandling()
+        elif inp_opt == 'home' or inp_opt == '3':
+            self.mainMenu()
+    
+    def servicesFileHandling(self):
+        file = File()
+        print(f"\nBelow are the services for file handling, please choose an option:\n1. List Files\n2. Delete a file\n3. Create a File\n4. Search a file\n5. Backup All Files ")
+        inp_file = input("Choose an option (1-5) or home to return Home # ")
+        if inp_file == '1':
+            file.listFiles()
+
         
+    def servicesFolderHandling(self):
+        folder = Folder()
+        print(f"\nBelow are the services for folder handling, please choose an option:\n1. List Folder\n2. Delete a folder\n3. Create a folder\n4. Backup All Folders ")
+
     def processManagement(self):
         print("Opening Task Manager...")
     

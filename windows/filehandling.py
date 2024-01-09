@@ -14,7 +14,7 @@ class File:
         self.filetype = filetype
         self.rights = rights
         self.currentdirectory = "./home"
-        self.filesdata = "files_data.json"
+        self.filesdata = "./windows/files_data.json"
         self.filesdict = {}
         self.loadFileDetails()
         self.saveFileDetails()
@@ -60,6 +60,11 @@ class File:
         else:
             print(f"\nFile NOT found with name {inp_filename}. :()")
             return False
+    
+    def listFiles(self):
+        self.loadFileDetails()
+        for key in self.filesdict:
+            print(f"\n{key}")
 
 
     def deleteFile(self):
@@ -126,8 +131,8 @@ class File:
             print(f"File '{self.filesdata}' not found. Creating a new one. :)")
 
         
-file1 = File()
-file1.createFile()
-file1.changeFileRights()
+# file1 = File()
+# file1.createFile()
+# file1.changeFileRights()
 
 # file1.searchFile()

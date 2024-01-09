@@ -12,9 +12,9 @@ class Folder:
     def __init__(self, foldername=None, rights="---------"):
         self.foldername = foldername
         self.rights = rights
-        self.currentdirectory = os.getcwd()
+        # self.currentdirectory = os.getcwd()
         self.currentdirectory = "./home"
-        self.foldersdata = "folders_data.json"
+        self.foldersdata = "./windows/folders_data.json"
         self.foldersdict = {}
         self.loadFolderDetails()
         self.saveFolderDetails()
