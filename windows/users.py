@@ -40,7 +40,7 @@ class User:
         user = {}
         auto_id = self.defaultid + 1
         default_rights = 5
-        username = str(input("Enter New User Name"))
+        username = str(input("Enter New User Name: "))
         userpassword = str(input("Enter New User password: "))
         confirm_password = str(input("Confirm User password: "))
     

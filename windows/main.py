@@ -64,9 +64,10 @@ class OperatingSystemSimulation():
                 self.login()
 
         elif inp_username == 'cancel':
+            print("Operation cancelled :| ")
             self.lsScreen()
         else:
-            print(f"\n{inp_username} not found :()")
+            print(f"\n{inp_username} not found :(")
     
     # Screen - Signup 
     def signup(self):
@@ -100,7 +101,22 @@ class OperatingSystemSimulation():
 
     # Screen - User Management
     def userManagement(self):
-        print('You entered in User Management')
+        print(f"\n----- Entered User Management -----\n1. Create New User\n2. Delete a user\n3. Change UserType ")
+        inp_um = input("Choose an option (1-3) OR type 'home' to return to Main-Menu # ")
+        user = User()
+        if inp_um == 'home':
+            self.mainMenu()
+        
+        elif inp_um == '1':
+            user.createNewUser()
+        elif inp_um == '2':
+            user.deleteUser()
+        
+        elif inp_um == '3':
+            user.updateUserType()
+        self.userManagement()
+            
+
     
     # Screen - Services / Management
     def serviceManagement(self):
@@ -139,20 +155,25 @@ class OperatingSystemSimulation():
         inp_file = input("Choose an option (1-5) or 'home' to return Home # ")
         if inp_file == '1':
             file.listFiles()
+
         elif inp_file == '2':
             mutex.acquire() 
-            print("Bu")
             file.deleteFile() # File deleted
             mutex.release() 
+
         elif inp_file == '3':
             mutex.acquire() 
             file.createFile()
             mutex.release()    
             time.sleep(1)
+
         elif inp_file == '4':
             file.searchFile()
+
         elif inp_file == '5':
+            mutex.acquire()
             file.backupAllFiles()   
+            mutex.release()
         
         self.serviceManagement()
 
