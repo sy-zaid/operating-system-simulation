@@ -3,26 +3,56 @@ from users import User
 from filehandling import File
 from folderhandling import Folder
 import threading
-import random
-import time
 
+# For semaphores
 buf = []
 empty = threading.Semaphore(1)
 full = threading.Semaphore(0)
 mutex = threading.Lock()
 
 class OperatingSystemSimulation():
-    def __init__(self,currentuser):
-        self.currentuser = None
+    def __init__(self,currentuser = None):
+        self.currentuser = currentuser
     
+
+    def lsScreen(self):
+        """
+        A function to display the Login/SignUp Screen to the user.
+        
+        1. Login to existing user
+        2. Signup as a new user
+
+        input-parameters:
+        - lsinput: To choose between login/signup
+            -- shut: to shutdown
+
+        """
+        print("\n------------------------------------------------------------------\n")
+        print("\n------------------------- WELCOME TO ZAT-OS -------------------------\n")
+        print("\n------------------------------------------------------------------\n")
+        print(f"1. Login to existing user\n2. Signup as a new user")
+        lsinput = input("Enter your choice (1-2) OR 'shut' to shutdown the system # ")
+
+        if lsinput == 'shut': # If user wants to shutdown the system.
+            print(f"\nShutting down...")
+            time.sleep(3) #Timer to shutdown
+            return
+        elif lsinput == '1': # If user wants to login
+            self.login()
+        elif lsinput == '2': # If user wants to signup
+            self.signup()
+        
+        else:
+            print(f"\nInvalid Input Choice, Please Retry...")
+            self.lsScreen()
     def login(self):
         print("\nEnter login credentials...")
         inp_username = input("Enter username OR 'admin' for admin-user OR 'cancel' to cancel operation # ")
         inp_password = input("Enter password # ")
         user = User()
-        if inp_username in user.getUsers() and inp_username != 'cancel':
-            userdata = user.getUsers().get(inp_username)
-            if userdata['userpassword'] == inp_password:
+        if inp_username in user.getUsers() and inp_username != 'cancel': # Checks if username exists in json file | and if user doesn't cancels the operation.
+            userdata = user.getUsers().get(inp_username) # "szaid": {"userid": 2, "username": "szaid", "userpassword": "abc", "userrights": 5}
+            if userdata['userpassword'] == inp_password: # Compares userpassword with the input password.
                 print(f"\n----- Welcome {inp_username} :) -----\n")
                 self.currentuser = inp_username
                 self.mainMenu()
@@ -41,23 +71,7 @@ class OperatingSystemSimulation():
         user.createNewUser()
         self.login()
 
-    def lsScreen(self):
-        print("\n------------------------- WELCOME TO ZAT -------------------------\n")
-        print(f"1. Login to existing user\n2. Signup as a new user")
-        lsinput = input("Enter your choice (1-2) OR 'shut' to shutdown the system # ")
 
-        if lsinput == 'shut':
-            print(f"\nShutting down...")
-            time.sleep(3)
-            return
-        elif lsinput == '1':
-            self.login()
-        elif lsinput == '2':
-            self.signup()
-        
-        else:
-            print(f"\nInvalid Input Choice, Please Retry...")
-            self.lsScreen()
 
         
 
@@ -88,6 +102,11 @@ class OperatingSystemSimulation():
         print('You entered in User Management')
     
     def serviceManagement(self):
+        """
+        1. Files Services
+        2. Folder Services
+        3. Home
+        """
         print(f"1. Files Services\n2. Folder Services\n3. Home")
         inp_opt = input("Choose an option (1-3) # ")
         if inp_opt == '1':
