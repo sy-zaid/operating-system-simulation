@@ -78,7 +78,7 @@ class OperatingSystemSimulation():
 
     # Screen - Main-Menu 
     def mainMenu(self):
-        print(f"1. User Management\n2. Service Management\n3. Process Management\n4. Backup")
+        print(f"\n---------- MAIN-MENU ----------\n1. User Management\n2. Service Management\n3. Process Management\n4. Backup")
         first_input = input("Enter your choice (1-4) OR 'logout' to logout of this account # ")
         if first_input == '1':
             self.userManagement()
@@ -98,7 +98,7 @@ class OperatingSystemSimulation():
         elif str(first_input) and str(first_input) == 'logout':
             print(f"\nLogged Out...")
             self.lsScreen()
-
+    
     # Screen - User Management
     def userManagement(self):
         print(f"\n----- Entered User Management -----\n1. Create New User\n2. Delete a user\n3. Change UserType ")
