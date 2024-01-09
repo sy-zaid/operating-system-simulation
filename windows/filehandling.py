@@ -171,6 +171,7 @@ class File:
             # Backup each file to the destination directory
             for file in files:
                 source_path = os.path.join(self.currentdirectory, file)
+                print(source_path)
                 destination_path = os.path.join(destination_directory, file)
 
                 shutil.copy2(source_path, destination_path)  # Copy file with metadata
@@ -217,3 +218,4 @@ class File:
 # # file1.changeFileRights()
 # file1.deleteFile()
 # file1.searchFile()
+# file1.backupAllFiles()

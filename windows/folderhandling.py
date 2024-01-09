@@ -154,21 +154,12 @@ class Folder:
         - source_directory (str): The path to the source directory.
         - destination_directory (str): The path to the destination directory.
         """
-        destination_directory = input("Enter the path to backups folder # ")
+        # destination_directory = os.path.abspath(input("Enter the path to backups folder # "))
+        destination_directory = './'
         try:
             # Create the destination directory if it doesn't exist
             os.makedirs(destination_directory, exist_ok=True)
-
-            # List all folders in the source directory
-            folders = [f for f in os.listdir(self.currentdirectory) if os.path.isdir(os.path.join(self.currentdirectory, f))]
-
-            # Backup each folder to the destination directory
-            for folder in folders:
-                source_path = os.path.join(self.currentdirectory, folder)
-                destination_path = os.path.join(destination_directory, folder)
-
-                shutil.copy2(source_path, destination_path)  # Copy folder with metadata
-
+            shutil.copytree(self.currentdirectory, os.path.join(destination_directory, 'backup')) # Copying folder with metadata
             print(f"\nBackup successfull! Folders backed up from {self.currentdirectory} to {destination_directory}")
         except Exception as e:
             print(f"\nBackup failed. Error: {e}")
@@ -225,8 +216,8 @@ class Folder:
         except FileNotFoundError:
             print(f"File '{self.foldersdata}' not found. Creating a new one. :)")
 
-# folder1 = Folder()
+folder1 = Folder()
 # folder1.createFolder()
 # folder1.changeFolderRights()
 # folder1.searchFolder()
-# folder1.backupAllFolders()
+folder1.backupAllFolders()

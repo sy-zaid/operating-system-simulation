@@ -1,4 +1,4 @@
-import os,time
+import time
 from users import User
 from filehandling import File
 from folderhandling import Folder
@@ -17,7 +17,7 @@ class OperatingSystemSimulation():
     def __init__(self,currentuser = None):
         self.currentuser = currentuser
     
-
+    # Screen - Function for Login/SignUp .
     def lsScreen(self):
         """
         A function to display the Login/SignUp Screen to the user.
@@ -30,9 +30,7 @@ class OperatingSystemSimulation():
             -- shut: to shutdown
 
         """
-        print("\n------------------------------------------------------------------\n")
-        print("\n------------------------- WELCOME TO ZAT-OS -------------------------\n")
-        print("\n------------------------------------------------------------------\n")
+        print("\n---------------------------------------------------------------------\n------------------------- WELCOME TO ZAT-OS -------------------------\n---------------------------------------------------------------------")
         print(f"1. Login to existing user\n2. Signup as a new user")
         lsinput = input("Enter your choice (1-2) OR 'shut' to shutdown the system # ")
 
@@ -48,6 +46,8 @@ class OperatingSystemSimulation():
         else:
             print(f"\nInvalid Input Choice, Please Retry...")
             self.lsScreen()
+    
+    # Screen - Login 
     def login(self):
         print("\nEnter login credentials...")
         inp_username = input("Enter username OR 'admin' for admin-user OR 'cancel' to cancel operation # ")
@@ -67,17 +67,15 @@ class OperatingSystemSimulation():
             self.lsScreen()
         else:
             print(f"\n{inp_username} not found :()")
-        
+    
+    # Screen - Signup 
     def signup(self):
         print("\nEnter signup credentials...")
         user = User()
         user.createNewUser()
         self.login()
 
-
-
-        
-
+    # Screen - Main-Menu 
     def mainMenu(self):
         print(f"1. User Management\n2. Service Management\n3. Process Management\n4. Backup")
         first_input = input("Enter your choice (1-4) OR 'logout' to logout of this account # ")
@@ -100,10 +98,11 @@ class OperatingSystemSimulation():
             print(f"\nLogged Out...")
             self.lsScreen()
 
-    
+    # Screen - User Management
     def userManagement(self):
         print('You entered in User Management')
     
+    # Screen - Services / Management
     def serviceManagement(self):
         """
         1. Files Services
@@ -126,6 +125,7 @@ class OperatingSystemSimulation():
 
         self.serviceManagement()
     
+    # 2nd Screen of Services (For Files)
     def servicesFileHandling(self):
         """
         1. List Files
@@ -156,7 +156,7 @@ class OperatingSystemSimulation():
         
         self.serviceManagement()
 
-        
+    # 2nd Screen of Services (For Folders)
     def servicesFolderHandling(self):
         """
         1. List Folders
@@ -183,6 +183,7 @@ class OperatingSystemSimulation():
         
         self.serviceManagement()
 
+    # 2nd Screen of Services (For Example Task)
     def servicesSortingArray(self):
         """
         Function to take input for sorting and simulate the threads in an OS.
@@ -194,7 +195,7 @@ class OperatingSystemSimulation():
         sortByTwoThreads(inp_range)
         self.serviceManagement()
 
-
+    # Screen - Process Management
     def processManagement(self):
         print(f"\n----- Entered Process Management -----\n1. Show Task Manager\n2. Kill a process\n3. Start a process and show in Task-Manager")
         inp_pm = input("Choose an option (1-3) OR type 'home' to return to Main-Menu # ")
@@ -218,10 +219,22 @@ class OperatingSystemSimulation():
 
         self.processManagement()
 
-    
+    # Screen - Backup
     def backup(self):
-        print("Creating backup for files...")
-
+        print(f"\n----- Entered Backup -----\n1. Backup Files\n2. Backup Folders")
+        inp_bp = input("Choose an option (1-2) OR type 'home' to return to Main-Menu # ")
+        if inp_bp == 'home':
+            self.mainMenu()
+        
+        elif inp_bp == '1':
+            f = File()
+            f.backupAllFiles()
+        
+        elif inp_bp == '2':
+            f = Folder()
+            f.backupAllFolders()
+        
+        self.backup()
 if __name__ == "__main__":
     OS = OperatingSystemSimulation()
     OS.lsScreen()
