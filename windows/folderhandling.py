@@ -71,6 +71,8 @@ class Folder:
             try:
                 os.rmdir(self.foldersdict[inp_foldername]["folderpath"])
                 del self.foldersdict[inp_foldername]
+                with open(self.foldersdata, 'w') as file:
+                    json.dump(self.foldersdict, file)
                 self.saveFolderDetails()
                 print(f"\nSuccessfully deleted {inp_foldername} :)")
             except:
