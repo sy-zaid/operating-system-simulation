@@ -13,7 +13,6 @@ class Folder:
         self.foldername = foldername
         self.currentuser = currentuser
         self.rights = rights
-        # self.currentdirectory = os.getcwd()
         self.currentdirectory = "./home"
         self.foldersdata = "./windows/folders_data.json"
         self.foldersdict = {}

@@ -2,6 +2,7 @@ import os,time
 from users import User
 from filehandling import File
 from folderhandling import Folder
+from processhandling import TaskManager
 from exampletasks import sortByTwoThreads
 import threading
 
@@ -78,7 +79,7 @@ class OperatingSystemSimulation():
 
     def mainMenu(self):
         print(f"1. User Management\n2. Service Management\n3. Process Management\n4. Backup")
-        first_input = input("Enter your choice(1-4 or 'home' to return home | 'logout') # ")
+        first_input = input("Enter your choice (1-4) OR 'logout' to logout of this account # ")
         if first_input == '1':
             self.userManagement()
         
@@ -108,8 +109,8 @@ class OperatingSystemSimulation():
         2. Folder Services
         3. Perform Sorting
         """
-        print(f"1. Files Services\n2. Folder Services\n3. Perform Sorting")
-        inp_opt = input("Choose an option (1-3) # ")
+        print(f"\n----- Entered Services / Management -----\n1. Files Services\n2. Folder Services\n3. Perform Sorting")
+        inp_opt = input("Choose an option (1-3) OR type 'home' to return to Main-Menu # ")
         if inp_opt == '1':
             self.servicesFileHandling()
         elif inp_opt == '2':
@@ -117,7 +118,7 @@ class OperatingSystemSimulation():
         elif inp_opt == '3':
             self.servicesSortingArray()
         elif inp_opt == 'home':
-            self.mainMenu() 
+            self.mainMenu()
     
     def servicesFileHandling(self):
         """
@@ -182,15 +183,35 @@ class OperatingSystemSimulation():
 
         """
         print(f"\nSorting an Array\nEnter a range to create 10 random numbers.")
-        inp_range = input("(e.g. 0,100)# ")
+        inp_range = input("(e.g. 0,100) # ")
         inp_range = list(map(int,inp_range.split(",")))
         sortByTwoThreads(inp_range)
         self.serviceManagement()
 
 
-
     def processManagement(self):
-        print(f"\Entered Process Management...")
+        print(f"\n----- Entered Process Management -----\n1. Show Task Manager\n2. Kill a process\n3. Start a process and show in Task-Manager")
+        inp_pm = input("Choose an option (1-3) OR type 'home' to return to Main-Menu # ")
+        TM = TaskManager()
+        if inp_pm == 'home':
+            self.mainMenu()
+        
+        elif inp_pm == '1':
+            TM.displayProcesses()
+        
+        elif inp_pm == '2':
+            TM.killProcess()
+        
+        elif inp_pm == '3':
+            print("\nStarting process of Sorting Array for checking.")
+            print(f"\nSorting an Array\nEnter a range to create 10 random numbers.")
+            inp_range = input("(e.g. 0,100) # ")
+            inp_range = list(map(int,inp_range.split(",")))
+            sortByTwoThreads(inp_range)
+            TM.displayProcesses()
+
+        self.processManagement()
+
     
     def backup(self):
         print("Creating backup for files...")
