@@ -165,8 +165,8 @@ class File:
             print(f"File '{self.filesdata}' not found. Creating a new one. :)")
 
         
-file1 = File()
-file1.createFile()
+# file1 = File()
+# file1.createFile()
 # # file1.changeFileRights()
-file1.deleteFile()
+# file1.deleteFile()
 # file1.searchFile()

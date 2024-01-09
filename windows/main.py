@@ -94,7 +94,7 @@ class OperatingSystemSimulation():
         elif inp_opt == '2':
             self.servicesFolderHandling()
         elif inp_opt == 'home' or inp_opt == '3':
-            self.mainMenu()
+            self.mainMenu() 
     
     def servicesFileHandling(self):
         """
