@@ -4,7 +4,7 @@ import os
 
 class TaskManager:
     def __init__(self):
-        self._output_file = 'runningtasks.txt'
+        self._output_file = './windows/runningtasks.txt'
         self.killpid = None
 
     def runTasklist(self):
@@ -19,7 +19,6 @@ class TaskManager:
         with open(self._output_file, 'r') as file:
             content = file.read()
             easygui.msgbox(content)
-            
 
     def killProcess(self):
         try:
@@ -35,16 +34,12 @@ class TaskManager:
             
         except:
             print(f"\nFailed to kill the process with PID: {self.killpid}")
-
+            return 
     
 
-
-# Run the loop
-        
+       
 tm = TaskManager()
-# while True:
 tm.runTasklist()
 tm.displayProcesses()
 tm.killProcess()
-    # Sleep for some time (e.g., 5 seconds) before running again
-    # time.sleep(5)
+    

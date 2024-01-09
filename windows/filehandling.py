@@ -23,6 +23,13 @@ class File:
 
 
     def createFile(self):
+        """
+            Creates a file of user's choice
+            
+            Creating a new file...
+            Enter a file name to create: (e.g. file1.txt) #
+            
+            """
         self.loadFileDetails()
         print("\nCreating a new file...")
         filename = input("Enter a file name to create: (e.g. file1.txt) # ")
@@ -50,6 +57,13 @@ class File:
             print(f"\nExit code-1 | failed to create file. {e}")
 
     def searchFile(self):
+        """
+        Searches for existing files 
+
+        Searching for a file...
+        Enter a filename to search #
+        
+        """
         print("\nSearching for a file...")
         self.loadFileDetails()
         inp_filename = input("Enter a filename to search # ")
@@ -67,6 +81,17 @@ class File:
             return False
     
     def listFiles(self):
+        """
+        This method lists down all the existing files.
+
+         Below are all the files created in OS
+        Home
+        1. Files Services
+        2. Folder Services
+        3. Home
+        Choose an option (1-3) #
+        
+        """
         print(f"\nBelow are all the files created in OS")
         self.loadFileDetails()
         for key in self.filesdict:
@@ -74,6 +99,14 @@ class File:
 
 
     def deleteFile(self):
+        """
+        This function deletes a file if exists, and "Cancel" will stop operation
+
+        Deleting a file...
+        Enter a filename to delete it OR 'cancel' to cancel the operation #
+
+        """
+
         print("\nDeleting a file... ")
         self.loadFileDetails()
         inp_filename = input("Enter a filename to delete it OR 'cancel' to cancel the operation # ")
@@ -92,6 +125,12 @@ class File:
             print("\nOperation cancelled :|")
 
     def changeFileRights(self):
+        """
+        This method interacts with the user to change
+        the file rights within the self.filesdict dictionary
+        and displays the updated information after the change is made.
+        
+        """
         print("\nChanging the rights of the file...")
         self.loadFileDetails()
         inp_filename = input("Enter the filename you want to change rights of OR 'cancel' to cancel the operation # ")
@@ -163,6 +202,9 @@ class File:
 
         
     def loadFileDetails(self):
+        """
+        This function aims to load previously saved file details into the program
+        """
         try:
             with open(self.filesdata, 'r') as file:
                 self.filesdict = json.load(file)
