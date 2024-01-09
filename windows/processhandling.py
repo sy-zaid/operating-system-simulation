@@ -27,6 +27,7 @@ class TaskManager:
                 commandtokill = f"taskkill /F /PID {self.killpid}"
                 subprocess.run(commandtokill)
                 print(f"Process with PID {self.killpid} killed successfully :)\n")
+                self.runTasklist()
                 self.displayProcesses()
 
             else:

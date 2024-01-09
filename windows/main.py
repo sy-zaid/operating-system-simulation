@@ -126,7 +126,7 @@ class OperatingSystemSimulation():
         3. Perform Sorting
         """
         print(f"\n----- Entered Services / Management -----\n1. Files Services\n2. Folder Services\n3. Perform Sorting\n4. Open Application")
-        inp_opt = input("Choose an option (1-3) OR type 'home' to return to Main-Menu # ")
+        inp_opt = input("Choose an option (1-4) OR type 'home' to return to Main-Menu # ")
         if inp_opt == '1':
             self.servicesFileHandling()
         elif inp_opt == '2':
