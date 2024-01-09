@@ -12,8 +12,8 @@ full = threading.Semaphore(0)
 mutex = threading.Lock()
 
 class OperatingSystemSimulation():
-    def __init__(self):
-        pass
+    def __init__(self,currentuser):
+        self.currentuser = None
     
     def login(self):
         print("\nEnter login credentials...")
@@ -24,6 +24,7 @@ class OperatingSystemSimulation():
             userdata = user.getUsers().get(inp_username)
             if userdata['userpassword'] == inp_password:
                 print(f"\n----- Welcome {inp_username} :) -----\n")
+                self.currentuser = inp_username
                 self.mainMenu()
             else:
                 print(f"\nIncorrect password entered.")
