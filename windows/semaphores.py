@@ -9,20 +9,20 @@ mutex = threading.Lock()
 
 
 def producer():
-    # nums = range(5)
+    nums = range(5)
     global buf
-    # if len(buf) < len(nums):
-    # num = random.choice(nums)
-    empty.acquire()
-    mutex.acquire()  # added
-    # buf.append(num)
-    # print("Produced", num, buf)
-    mutex.release()  # added
-    full.release()
-    time.sleep(1)
+    if len(buf) < len(nums):
+        num = random.choice(nums)
+        empty.acquire()
+        mutex.acquire()  # added
+        buf.append(num)
+        print("Produced", num, buf)
+        mutex.release()  # added
+        full.release()
+        time.sleep(1)
 
-    # else:
-    #     mutex.acquire()
+    else:
+        mutex.acquire()
 
 
 def consumer():
@@ -73,13 +73,13 @@ consumerThread5 = threading.Thread(target=consumer)
 producerThread6 = threading.Thread(target=producer)
 consumerThread6 = threading.Thread(target=consumer)
 #
-# consumerThread1.start()
-# producerThread1.start()
+consumerThread1.start()
+producerThread1.start()
 
-# consumerThread2.start()
-# producerThread2.start()
+consumerThread2.start()
+producerThread2.start()
 
-# consumerThread3.start()
-# producerThread3.start()
+consumerThread3.start()
+producerThread3.start()
 
 

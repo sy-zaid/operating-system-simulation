@@ -124,7 +124,7 @@ class OperatingSystemSimulation():
         4. Search a file
         5. Backup All Files
         """
-        file = File()
+        file = File(currentuser=self.currentuser)
         print(f"\nBelow are the services for file handling, please choose an option:\n1. List Files\n2. Delete a file\n3. Create a File\n4. Search a file\n5. Backup All Files ")
         inp_file = input("Choose an option (1-5) or 'home' to return Home # ")
         if inp_file == '1':
@@ -154,7 +154,7 @@ class OperatingSystemSimulation():
         4. Search a folder
         5. Backup All Folder
         """
-        folder = Folder()
+        folder = Folder(currentuser=self.currentuser)
         print(f"\nBelow are the services for folder handling, please choose an option:\n1. List Folder\n2. Delete a folder\n3. Create a Folder\n4. Search a folder\n5. Backup All Folders ")
         inp_folder = input("Choose an option (1-5) or 'home' to return Home # ")
         if inp_folder == 'home':

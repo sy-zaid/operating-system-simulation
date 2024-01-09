@@ -7,12 +7,13 @@ class File:
 
     VARIABLES:
     --- self.filesdict == for storing the details about all the files with filenames as keys.
-        syntax: {"filename":{"filename":filename,"filetype":filetype,"filesize":filesize,"filepath":filepath,filerights":filerights}}
+        syntax: {"filename":{"filename":filename,"filetype":filetype,"filesize":filesize,"filepath":filepath,"owner":currentuser,filerights":filerights}}
 
     """
-    def __init__(self,filename = None,filetype = None ,rights = "---------"):
+    def __init__(self,filename = None,filetype = None ,currentuser = None,rights = "---------"):
         self.filename = filename
         self.filetype = filetype
+        self.currentuser = currentuser
         self.rights = rights
         self.currentdirectory = "./home"
         self.filesdata = "./windows/files_data.json"
@@ -36,6 +37,7 @@ class File:
                 newfile["filetype"] = filetype
                 newfile["filesize"] = os.path.getsize(filepath) #Gets the size of the current file.
                 newfile["filepath"] = filepath
+                newfile["owner"] = self.currentuser
                 newfile["filerights"] = filerights
                 self.filesdict[f"{filename}"] = newfile
                 self.saveFileDetails()
@@ -107,6 +109,9 @@ class File:
         else:
             print("\nOperation cancelled :| ")
 
+    def getCurrentUser(self):
+        return self.currentuser
+    
     def backupAllFiles(self):
         
         """

@@ -6,11 +6,12 @@ class Folder:
 
     VARIABLES:
     --- self.foldersdict == for storing the details about all the folders with folder names as keys.
-        syntax: {"foldername":{"foldername": foldername, "folderpath": folderpath, "folderrights": folderrights}}
+        syntax: {"foldername":{"foldername": foldername, "folderpath": folderpath,"owner":currentuser,"folderrights": folderrights}}
 
     """
-    def __init__(self, foldername=None, rights="---------"):
+    def __init__(self, foldername=None,currentuser = None,rights="---------"):
         self.foldername = foldername
+        self.currentuser = currentuser
         self.rights = rights
         # self.currentdirectory = os.getcwd()
         self.currentdirectory = "./home"
@@ -30,6 +31,7 @@ class Folder:
             os.makedirs(folderpath)
             newfolder["foldername"] = foldername
             newfolder["folderpath"] = folderpath
+            newfolder["owner"] = self.currentuser
             newfolder["folderrights"] = folderrights
             self.foldersdict[foldername] = newfolder
             self.saveFolderDetails()
