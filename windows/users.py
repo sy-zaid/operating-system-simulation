@@ -75,11 +75,16 @@ class User:
             print(f"{username} not found!")
         self.saveUsersToFile()
         
-    def updateUserType(self,username,adminusername,adminpassword,userrights):
+    def updateUserType(self):
+        print("\nUpdating user...")
+        username = input("Enter username to update: ")
+        adminusername = input("Enter admin-username: ")
+        adminpassword = input("Enter admin-password: ")
+        userrights = input(f"Enter updated rights for the user {username}: ")
         user_dict = self.usersdict[username]
         admin = self.usersdict['admin']
         if adminusername == admin['username'] and adminpassword == admin['userpassword']:
-            user_dict['userrights'] = userrights
+            user_dict['userrights'] = int(userrights)
         self.saveUsersToFile()
         
 
